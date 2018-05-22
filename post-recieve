@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# get commit
+hash=`echo $params | sed 's/^.* \(.*\) .*/\1/'`
+branch=`git branch --contains $hash`
+tail=`git log -1 --pretty=format:' - %H %cn: %s' --abbrev=150 $hash `
+last_commit=`echo $branch$tail`
+
+# get last word
+info=`echo ${last_commit##* }`
+
+# seperate
+IFS='/' read -r -a array <<< "$info"
+
+# extract
+echo "${array[0]}"
+echo "${array[1]}"
