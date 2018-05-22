@@ -9,9 +9,5 @@ last_commit=`echo $branch$tail`
 # get last word
 info=`echo ${last_commit##* }`
 
-# seperate
-IFS='/' read -r -a array <<< "$info"
-
-# extract
-echo "${array[0]}"
-echo "${array[1]}"
+# STDOUT the chapter and question
+echo $info
